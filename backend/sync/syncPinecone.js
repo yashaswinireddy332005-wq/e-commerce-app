@@ -1,8 +1,8 @@
 require('dotenv').config();
 
 const mongoose = require('mongoose');
-const { GoogleGenerativeAI } = require('@google/generative-ai');
 const { upsertVectors, purgeNamespace, getNamespaceVectorCount } = require('../pineconeClient');
+const { embedText, EMBEDDING_TASK_TYPES } = require('../services/embeddingService');
 
 const {
   MONGO_URI,
@@ -51,9 +51,6 @@ module.exports = async function syncPinecone() {
     Product = require('../models/product');
   }
 
-  const genAI = new GoogleGenerativeAI(GOOGLE_AI_API_KEY);
-  const embedModel = genAI.getGenerativeModel({ model: 'models/text-embedding-004' });
-
   const products = await Product.find().lean();
   if (!products.length) {
     if (shouldDisconnect) await mongoose.disconnect();
@@ -93,7 +90,10 @@ module.exports = async function syncPinecone() {
       const text = `${doc.name || ''}. ${doc.description || ''}`.trim();
       if (!text) continue;
       try {
-        const embedding = (await embedModel.embedContent(text)).embedding.values;
+        const embedding = await embedText(text, {
+          taskType: EMBEDDING_TASK_TYPES.RETRIEVAL_DOCUMENT,
+          title: doc.name,
+        });
         vectors.push({
           id: doc._id.toString(),
           values: embedding,

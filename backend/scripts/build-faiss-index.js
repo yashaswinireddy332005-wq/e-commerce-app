@@ -3,8 +3,12 @@ require('dotenv').config();
 const mongoose = require('mongoose');
 const fs = require('fs');
 const path = require('path');
-const { GoogleGenerativeAI } = require('@google/generative-ai');
 const { IndexFlatL2 } = require('faiss-node');
+const {
+  EMBEDDING_DIMENSION,
+  EMBEDDING_TASK_TYPES,
+  embedText,
+} = require('../services/embeddingService');
 
 const { MONGO_URI, GOOGLE_AI_API_KEY } = process.env;
 if (!MONGO_URI || !GOOGLE_AI_API_KEY) {
@@ -23,32 +27,28 @@ async function main() {
     'products'
   );
 
-  // 3) Embed model
-  const genAI = new GoogleGenerativeAI(GOOGLE_AI_API_KEY);
-  const embedModel = genAI.getGenerativeModel({ model: 'models/text-embedding-004' });
-
-  // 4) Load all products
+  // 3) Load all products
   const products = await Product.find().lean();
   console.log(`🔎 Loaded ${products.length} products`);
   if (!products.length) return process.exit(0);
 
-  // 5) Determine embedding dim
-  const sample = (await embedModel.embedContent(
-    `${products[0].name}: ${products[0].description}`
-  )).embedding.values;
-  const dim = sample.length;
+  // 4) Gemini embeddings are explicitly truncated to 768 dimensions.
+  const dim = EMBEDDING_DIMENSION;
   console.log(`ℹ️ Embedding dim = ${dim}`);
 
-  // 6) Create FAISS index
+  // 5) Create FAISS index
   const index = new IndexFlatL2(dim);
   const metadata = [];
 
-  // 7) Loop and add one vector at a time
+  // 6) Loop and add one vector at a time
   for (const doc of products) {
     const text = `${doc.name}: ${doc.description}`;
     let embedding;
     try {
-      embedding = (await embedModel.embedContent(text)).embedding.values;
+      embedding = await embedText(text, {
+        taskType: EMBEDDING_TASK_TYPES.RETRIEVAL_DOCUMENT,
+        title: doc.name,
+      });
     } catch (e) {
       console.warn(`⚠️ Embedding failed for ${doc._id}`, e);
       continue;
@@ -59,7 +59,7 @@ async function main() {
   }
   console.log(`✅ Indexed ${index.ntotal()} vectors`);
 
-  // 8) Persist index & metadata
+  // 7) Persist index & metadata
   const storeDir = path.resolve(__dirname, '../faiss_stores');
   fs.mkdirSync(storeDir, { recursive: true });
   const idxPath  = path.join(storeDir, 'products.index');

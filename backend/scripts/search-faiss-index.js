@@ -2,8 +2,8 @@
 require('dotenv').config();
 const fs = require('fs');
 const path = require('path');
-const { GoogleGenerativeAI } = require('@google/generative-ai');
 const { IndexFlatL2 } = require('faiss-node');
+const { EMBEDDING_TASK_TYPES, embedText } = require('../services/embeddingService');
 
 const { GOOGLE_AI_API_KEY } = process.env;
 if (!GOOGLE_AI_API_KEY) {
@@ -33,9 +33,9 @@ async function main() {
   const index    = IndexFlatL2.read(idxPath);
 
   // 2) Embed the query text
-  const genAI = new GoogleGenerativeAI(GOOGLE_AI_API_KEY);
-  const model = genAI.getGenerativeModel({ model: 'models/text-embedding-004' });
-  const embedding = (await model.embedContent(query)).embedding.values;
+  const embedding = await embedText(query, {
+    taskType: EMBEDDING_TASK_TYPES.RETRIEVAL_QUERY,
+  });
 
   // 3) Perform the search
   //    FAISS-Node expects a plain array for both the query and returns { labels, distances }

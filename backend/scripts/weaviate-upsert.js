@@ -8,7 +8,7 @@ const weaviate       = weaviateModule.default || weaviateModule;
 const { generateUuid5, config } = weaviateModule;
 const { ApiKey }      = weaviateModule;
 const { getWeaviateClient } = require('../weaviateClient.js');
-const { GoogleGenerativeAI } = require('@google/generative-ai');
+const { embedText, EMBEDDING_TASK_TYPES } = require('../services/embeddingService');
 const {
   MONGO_URI,
   GOOGLE_AI_API_KEY,
@@ -39,11 +39,6 @@ async function main() {
       createdAt:   Date,
     })
   );
-
-  const genAI     = new GoogleGenerativeAI(GOOGLE_AI_API_KEY);
-  const embedModel = genAI.getGenerativeModel({
-    model: 'models/text-embedding-004'
-  });
 
   const client     = await getWeaviateClient();
   const collection = client.collections.get('Product');
@@ -82,7 +77,10 @@ async function main() {
     const text = `${doc.name}: ${doc.description}`;
     let embedding;
     try {
-      embedding = (await embedModel.embedContent(text)).embedding.values;
+      embedding = await embedText(text, {
+        taskType: EMBEDDING_TASK_TYPES.RETRIEVAL_DOCUMENT,
+        title: doc.name,
+      });
     } catch (e) {
       console.warn(`⚠️ Embedding failed for ${doc._id}`, e);
       continue;

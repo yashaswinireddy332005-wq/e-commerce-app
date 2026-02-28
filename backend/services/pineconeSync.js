@@ -1,22 +1,10 @@
 require('dotenv').config();
 
 const mongoose = require('mongoose');
-const { GoogleGenerativeAI } = require('@google/generative-ai');
 const { upsertVectors, deleteVectors } = require('../pineconeClient');
+const { embedText, EMBEDDING_TASK_TYPES } = require('./embeddingService');
 
 const namespace = process.env.PINECONE_NAMESPACE || '';
-
-let embedModel;
-const getEmbedModel = () => {
-  if (embedModel) return embedModel;
-  const { GOOGLE_AI_API_KEY } = process.env;
-  if (!GOOGLE_AI_API_KEY) {
-    throw new Error('GOOGLE_AI_API_KEY must be set to build Pinecone embeddings');
-  }
-  const genAI = new GoogleGenerativeAI(GOOGLE_AI_API_KEY);
-  embedModel = genAI.getGenerativeModel({ model: 'models/text-embedding-004' });
-  return embedModel;
-};
 
 const isPineconeConfigured = () =>
   Boolean(process.env.PINECONE_API_KEY && process.env.PINECONE_HOST);
@@ -38,8 +26,10 @@ const getProductModel = () => {
 const buildVectorPayload = async (product, pineconeId) => {
   const text = `${product.name || ''}. ${product.description || ''}`.trim();
   if (!text) return null;
-  const { embedding } = await getEmbedModel().embedContent(text);
-  const values = embedding?.values;
+  const values = await embedText(text, {
+    taskType: EMBEDDING_TASK_TYPES.RETRIEVAL_DOCUMENT,
+    title: product.name,
+  });
   if (!Array.isArray(values) || !values.length) return null;
   return {
     id: pineconeId,

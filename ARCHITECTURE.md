@@ -675,7 +675,7 @@ GET /api/search?q=macbook HTTP/1.1
 ```mermaid
 flowchart TD
     A[Product Data] --> B[Extract text:<br/>name + description + category + brand]
-    B --> C[Send to Google Generative AI<br/>text-embedding-004]
+    B --> C[Send to Google Generative AI<br/>gemini-embedding-001]
     C --> D[Receive 768-dimensional<br/>float32 vector]
     D --> E[Upsert to Pinecone<br/>with metadata]
     E --> F[id: product._id.toString]

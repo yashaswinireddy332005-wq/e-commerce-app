@@ -537,7 +537,7 @@ The application uses **Pinecone** as the primary vector database while still sup
    GOOGLE_AI_API_KEY=your_google_ai_api_key
    PINECONE_PURGE_ON_SYNC=true # set to false to skip clearing existing vectors during sync
    ```
-   The Google AI key powers the embedding model (`text-embedding-004`).
+   The Google AI key powers the embedding model (`gemini-embedding-001`).
 3. **Sync MongoDB products into Pinecone**:
    ```bash
    cd backend

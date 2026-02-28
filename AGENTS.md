@@ -120,7 +120,7 @@ project-root/
   - **Pinecone** (primary, serverless)
   - Weaviate (optional)
   - FAISS (optional, via faiss-node)
-- **LLM Integration**: Google Generative AI (`text-embedding-004`) for embeddings
+- **LLM Integration**: Google Generative AI (`gemini-embedding-001`) for embeddings
 - **API Docs**: Swagger UI (swagger-jsdoc + swagger-ui-express)
 - **Testing**: Jest + Supertest
 - **Dev Tools**: Nodemon for hot-reloading
@@ -263,7 +263,7 @@ project-root/
 ### 2. Vector Database Integration
 
 #### Pinecone Setup (`backend/pineconeClient.js`)
-- **Index**: 768-dimensional vectors (Google `text-embedding-004`)
+- **Index**: 768-dimensional vectors (Google `gemini-embedding-001`)
 - **Operations**:
   - `upsertVector(id, vector, metadata)`: Add/update product vector
   - `deleteVector(id)`: Remove product vector
