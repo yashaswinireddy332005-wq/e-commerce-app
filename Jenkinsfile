@@ -1,7 +1,7 @@
 #!/usr/bin/env groovy
 
 /**
- * Fusion Electronics - Production CI/CD Pipeline
+ *  - Production CI/CD Pipeline
  *
  * This Jenkins pipeline implements:
  * - Automated testing and quality gates
@@ -10,7 +10,7 @@
  * - Automated rollback capabilities
  * - Production-ready monitoring and health checks
  *
- * @author Fusion Electronics DevOps Team
+ * 
  * @version 2.0.0
  */
 
@@ -89,7 +89,7 @@ pipeline {
             steps {
                 script {
                     echo "========================================="
-                    echo "Fusion Electronics Deployment Pipeline"
+                    echo " Deployment Pipeline"
                     echo "========================================="
                     echo "Build Number: ${env.BUILD_NUMBER}"
                     echo "Git Commit: ${env.GIT_COMMIT}"

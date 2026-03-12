@@ -1,7 +1,7 @@
 # 1) Build stage — compile the React app
 FROM node:18-alpine AS builder
 
-LABEL org.opencontainers.image.description="Fusion Electronics Ecommerce Website frontend – a React SPA built with Material-UI, React-Router, Stripe integration and more."
+LABEL org.opencontainers.image.description="E-Commerce Frontend – a React SPA built with Material-UI, React-Router, Stripe integration and more."
 
 WORKDIR /app
 
@@ -20,7 +20,7 @@ RUN npm run build
 FROM nginx:alpine
 
 # Provide a human-readable description for the image
-LABEL org.opencontainers.image.description="Fusion Electronics Frontend – a React SPA built with Material-UI, React-Router, Stripe integration and more."
+LABEL org.opencontainers.image.description="E-Commerce Frontend – a React SPA built with Material-UI, React-Router, Stripe integration and more."
 
 WORKDIR /usr/share/nginx/html
 

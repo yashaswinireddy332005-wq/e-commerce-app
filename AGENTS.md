@@ -1,8 +1,8 @@
-# AI Coding Agent Instructions for Fusion Electronics E-commerce
+# AI Coding Agent Instructions for MERN-Stack Application E-commerce
 
 ## Project Overview
 
-**Fusion Electronics** is a production-ready, full-stack MERN (MongoDB, Express, React, Node.js) e-commerce application featuring:
+**MERN-Stack Application** is a production-ready, full-stack MERN (MongoDB, Express, React, Node.js) e-commerce application featuring:
 - Product browsing, search, and detailed views
 - Shopping cart and checkout flow with validation
 - User authentication (JWT-based)
@@ -985,12 +985,12 @@ vercel --prod
 ## Support and Contact
 
 For issues, questions, or contributions:
-- **GitHub Issues**: https://github.com/hoangsonww/MERN-Stack-Ecommerce-App/issues
-- **Email**: hoangson091104@gmail.com
-- **Author**: Son Nguyen (@hoangsonww)
+- **GitHub Issues**: https://github.com/MERN-Stack Application/MERN-Stack-Ecommerce-App/issues
+- **Email**: MERN-Stack Application
+- **Author**: MERN-Stack Application (MERN-Stack Application)
 
 ---
 
 **Last Updated**: 2025-10-04
 **Version**: 1.1.0
-**Maintained by**: Fusion Electronics Team
+**Maintained by**: MERN-Stack Application Team

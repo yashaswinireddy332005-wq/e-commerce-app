@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-**Fusion Electronics** is a production-ready MERN stack e-commerce application with AI-powered product recommendations using vector databases (Pinecone, Weaviate, FAISS). The project consists of a React frontend, Express.js backend, MongoDB database, and vector database integrations for semantic product search and recommendations.
+**MERN E-Commerce** is a production-ready MERN stack e-commerce application with AI-powered product recommendations using vector databases (Pinecone, Weaviate, FAISS). The project consists of a React frontend, Express.js backend, MongoDB database, and vector database integrations for semantic product search and recommendations.
 
 ## Essential Commands
 

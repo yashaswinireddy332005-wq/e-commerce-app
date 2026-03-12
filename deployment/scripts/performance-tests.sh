@@ -1,12 +1,12 @@
 #!/bin/bash
 
 ################################################################################
-# Performance Tests for Fusion Electronics
+# Performance Tests for 
 #
 # This script runs performance tests using Apache Bench (ab) or similar tools
 # to verify that the deployment can handle expected load.
 #
-# @author Fusion Electronics DevOps Team
+# 
 # @version 2.0.0
 ################################################################################
 

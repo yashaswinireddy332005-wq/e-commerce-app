@@ -1,6 +1,6 @@
-# Fusion Electronics - Deployment Guide
+# your-project - Deployment Guide
 
-This comprehensive guide covers all deployment strategies, infrastructure setup, and operational procedures for the Fusion Electronics application.
+This comprehensive guide covers all deployment strategies, infrastructure setup, and operational procedures for the your-project application.
 
 ## Table of Contents
 
@@ -18,7 +18,7 @@ This comprehensive guide covers all deployment strategies, infrastructure setup,
 
 ## Overview
 
-Fusion Electronics supports three production-ready deployment strategies:
+your-project supports three production-ready deployment strategies:
 
 1. **Blue-Green Deployment**: Zero-downtime deployments with instant rollback capability
 2. **Canary Deployment**: Gradual rollout with progressive traffic shifting
@@ -139,7 +139,7 @@ graph TB
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/hoangsonww/MERN-Stack-Ecommerce-App.git
+git clone https://github.com/your-project/MERN-Stack-Ecommerce-App.git
 cd MERN-Stack-Ecommerce-App
 ```
 

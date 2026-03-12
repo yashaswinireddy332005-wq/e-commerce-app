@@ -11,13 +11,12 @@ fi
 cat > ~/.npmrc <<EOF
 //npm.pkg.github.com/:_authToken=${GITHUB_TOKEN}
 //npm.pkg.github.com/:always-auth=true
-@hoangsonww:registry=https://npm.pkg.github.com
 EOF
 
-echo "🚀 Publishing @hoangsonww/ecommerce-fullstack-website-frontend to GitHub Packages..."
+echo "🚀 Publishing ecommerce-fullstack-website package..."
 npm publish --access public
 
 # 3) Friendly confirmation
 NAME=$(node -p "require('./package.json').name")
 VERSION=$(node -p "require('./package.json').version")
-echo "✅ Published ${NAME}@${VERSION} to https://npm.pkg.github.com/hoangsonww"
+echo "✅ Published ${NAME}@${VERSION}"

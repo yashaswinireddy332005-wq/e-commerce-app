@@ -2,8 +2,8 @@
 set -euo pipefail
 
 # 1) Configuration
-GH_USER="hoangsonww"
-IMAGE="ghcr.io/${GH_USER}/ecommerce-fullstack-website-frontend"
+GH_USER="your-username"
+IMAGE="ghcr.io/${GH_USER}/ecommerce-fullstack-website"
 VERSION=$(node -p "require('./package.json').version")
 
 # 2) Ensure we have a PAT with write:packages scope in GITHUB_TOKEN

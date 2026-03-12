@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ################################################################################
-# Canary Monitoring Script for Fusion Electronics
+# Canary Monitoring Script for 
 #
 # This script monitors canary deployments and compares metrics between
 # canary and stable versions to detect issues early.
@@ -12,7 +12,7 @@
 # - Request rate
 # - Pod resource usage
 #
-# @author Fusion Electronics DevOps Team
+# 
 # @version 2.0.0
 ################################################################################
 

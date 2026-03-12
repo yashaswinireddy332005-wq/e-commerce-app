@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ################################################################################
-# Rollback Script for Fusion Electronics
+# Rollback Script for 
 #
 # This script handles automatic rollback for failed deployments.
 # Supports both blue-green and canary deployment strategies.
@@ -9,7 +9,7 @@
 # Usage:
 #   ./rollback.sh [blue-green|canary|auto]
 #
-# @author Fusion Electronics DevOps Team
+# 
 # @version 2.0.0
 ################################################################################
 

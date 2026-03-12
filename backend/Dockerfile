@@ -18,7 +18,7 @@ RUN npm ci -w backend --include-workspace-root=false --omit=dev
 FROM node:18-alpine
 
 # Provide a human-readable description for the image
-LABEL org.opencontainers.image.description="Fusion Electronics Backend – a backend server for Fusion Electronics, a MERN-stack e-commerce website."
+LABEL org.opencontainers.image.description="E-Commerce Backend - Express.js server for MERN e-commerce application."
 
 WORKDIR /app
 ENV NODE_ENV=production

@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ################################################################################
-# Blue-Green Deployment Script for Fusion Electronics
+# Blue-Green Deployment Script for 
 #
 # This script implements blue-green deployment strategy for zero-downtime
 # deployments. It maintains two identical production environments (blue and green)
@@ -10,7 +10,7 @@
 # Usage:
 #   ./blue-green-deploy.sh [deploy-green|switch-to-green|switch-to-blue|cleanup-blue|cleanup-green]
 #
-# @author Fusion Electronics DevOps Team
+# 
 # @version 2.0.0
 ################################################################################
 

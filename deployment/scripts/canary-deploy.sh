@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ################################################################################
-# Canary Deployment Script for Fusion Electronics
+# Canary Deployment Script for 
 #
 # This script implements canary deployment strategy for gradual rollouts.
 # It allows you to test new versions with a small percentage of traffic
@@ -14,7 +14,7 @@
 #   CANARY_PERCENTAGE - Percentage of traffic to route to canary (default: 10)
 #   BUILD_TAG - Docker image tag for the new version
 #
-# @author Fusion Electronics DevOps Team
+# 
 # @version 2.0.0
 ################################################################################
 

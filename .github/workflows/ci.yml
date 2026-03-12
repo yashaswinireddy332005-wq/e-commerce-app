@@ -1,4 +1,4 @@
-name: CI/CD Pipeline for Fusion Electronics App
+name: CI/CD Pipeline for MERN Application App
 
 on:
   push:
@@ -160,7 +160,7 @@ jobs:
     steps:
       - name: CI/CD Pipeline Summary (log)
         run: |
-          echo "::group::📝 Fusion Electronics CI/CD Pipeline Summary"
+          echo "::group::📝 MERN Application CI/CD Pipeline Summary"
           echo ""
           echo "- 🔧 **Formatting:** ✅"
           echo "- ✅ **Backend Tests (multi-OS):** ✅"
@@ -174,7 +174,7 @@ jobs:
       - name: Write Summary to GitHub Step Summary
         run: |
           {
-            echo "## 🎉 Fusion Electronics CI/CD Pipeline Complete"
+            echo "## 🎉 MERN Application CI/CD Pipeline Complete"
             echo ""
             echo "| Item                             | Status                                              |"
             echo "| -------------------------------- | --------------------------------------------------- |"

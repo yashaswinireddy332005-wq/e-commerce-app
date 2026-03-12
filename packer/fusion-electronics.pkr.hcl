@@ -36,7 +36,7 @@ build {
 
   provisioner "shell" {
     inline = [
-      "docker tag fusion-electronics-backend:latest ghcr.io/hoangsonww/fusion-electronics-backend:${var.backend_version}"
+      "docker tag fusion-electronics-backend:latest ghcr.io/your-username/ecommerce-backend:${var.backend_version}"
     ]
   }
 }

@@ -20,19 +20,7 @@ We backport critical and high-severity security fixes to the latest two minor ve
 
 ## Reporting a Vulnerability
 
-If you discover a security issue in our code or infrastructure, please report it privately:
-
-1. **Email**:
-
-   ```text
-   hoangson091104@gmail.com
-   ```
-
-2. **PGP Key** (fingerprint):
-
-   ```
-   3F8A 2E4B 9D1C 7A5E 0B9F  1C23 4D56 7890 ABCD 1234
-   ```
+If you discover a security issue, please report it privately using the GitHub Security Advisory feature or contact the project maintainers.
 
    Attach your public key or encrypt your report to avoid eavesdropping.
 

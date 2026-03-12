@@ -4,11 +4,11 @@
 # Requires:
 #   CR_PAT      GitHub Container Registry token (write:packages)
 #   NPM_TOKEN   GitHub Packages npm token (read/write:packages)
-#   GH_USER     your GitHub username (default: hoangsonww)
+#   GH_USER     your GitHub username (default: your-username)
 # ────────────────────────────────────────────────────────────────────────────────
 
 # User/config
-GH_USER        ?= hoangsonww
+GH_USER        ?= your-username
 BACKEND_DIR    := backend
 
 # derive versions from package.json
@@ -16,8 +16,8 @@ FRONTEND_VERSION := $(shell node -p "require('./package.json').version")
 BACKEND_VERSION  := $(shell cd $(BACKEND_DIR) && node -p "require('./package.json').version")
 
 # image names
-FRONTEND_IMAGE := ghcr.io/$(GH_USER)/ecommerce-fullstack-website-frontend
-BACKEND_IMAGE  := ghcr.io/$(GH_USER)/fusion-electronics-backend
+FRONTEND_IMAGE := ghcr.io/$(GH_USER)/ecommerce-fullstack-website
+BACKEND_IMAGE  := ghcr.io/$(GH_USER)/ecommerce-backend
 
 # npm package names
 FRONTEND_PKG   := @$(GH_USER)/ecommerce-fullstack-website-frontend

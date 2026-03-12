@@ -1,8 +1,8 @@
 {
-  "name": "@hoangsonww/fusion-electronics-backend",
-  "displayName": "Fusion Electronics Backend",
-  "version": "1.1.1",
-  "description": "A backend server for Fusion Electronics - a MERN stack e-commerce website",
+  "name": "ecommerce-backend",
+  "displayName": "E-Commerce Backend",
+  "version": "1.0.0",
+  "description": "A backend server for a MERN stack e-commerce website",
   "main": "index.js",
   "scripts": {
     "start": "nodemon index.js",
@@ -27,18 +27,8 @@
     "stripe",
     "ecommerce"
   ],
-  "author": "Son Nguyen",
+  "author": "",
   "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/hoangsonww/MERN-Stack-Ecommerce-App.git"
-  },
-  "bugs": {
-    "url": "https://github.com/hoangsonww/MERN-Stack-Ecommerce-App/issues"
-  },
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com"
-  },
   "dependencies": {
     "@google/generative-ai": "^0.24.1",
     "bcryptjs": "^2.4.3",

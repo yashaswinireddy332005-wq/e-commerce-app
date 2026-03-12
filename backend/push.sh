@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-GITHUB_USER="hoangsonww"
-IMAGE_NAME="fusion-electronics-backend"
-VERSION="1.1.0"
+GITHUB_USER="your-username"
+IMAGE_NAME="ecommerce-backend"
+VERSION="1.0.0"
 IMAGE_REF="ghcr.io/${GITHUB_USER}/${IMAGE_NAME}:${VERSION}"
 
 # 1) make sure you’ve exported a token with pkg:write scope:

@@ -13,7 +13,7 @@ job "fusion-electronics" {
     task "api-backend" {
       driver = "docker"
       config {
-        image = "ghcr.io/hoangsonww/fusion-electronics-backend:1.1.0"
+        image = "ghcr.io/your-username/ecommerce-backend:1.0.0"
         ports = ["http"]
       }
       env {
@@ -48,7 +48,7 @@ job "fusion-electronics" {
     task "ui-frontend" {
       driver = "docker"
       config {
-        image = "ghcr.io/hoangsonww/fusion-electronics-frontend:1.1.0"
+        image = "ghcr.io/your-username/ecommerce-frontend:1.0.0"
         ports = ["web"]
       }
       resources {

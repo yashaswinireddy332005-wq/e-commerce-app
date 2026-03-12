@@ -4,15 +4,13 @@ const swaggerJSDoc = require('swagger-jsdoc');
 const swaggerDefinition = {
   openapi: '3.0.0',
   info: {
-    title: 'Fusion E-Commerce Backend APIs',
-    version: '1.1.0',
+    title: 'E-Commerce Backend APIs',
+    version: '1.0.0',
     description:
-      'API documentation for the Fusion E-Commerce backend server. This documentation provides detailed information on all available endpoints for managing products, users, authentication, and more.',
-    termsOfService: 'https://mern-stack-ecommerce-app-nine.vercel.app',
+      'API documentation for the E-Commerce backend server. This documentation provides detailed information on all available endpoints for managing products, users, authentication, and more.',
     contact: {
-      name: 'Fusion E-Commerce Website',
-      url: 'https://mern-stack-ecommerce-app-nine.vercel.app',
-      email: 'hoangson091104@gmail.com',
+      name: 'E-Commerce Support',
+      email: 'support@example.com',
     },
     license: {
       name: 'MIT License',

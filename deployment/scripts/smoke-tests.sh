@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ################################################################################
-# Smoke Tests for Fusion Electronics
+# Smoke Tests for 
 #
 # This script runs smoke tests to verify basic functionality after deployment.
 # Tests include:
@@ -11,7 +11,7 @@
 # - Vector DB connectivity
 # - Core user workflows
 #
-# @author Fusion Electronics DevOps Team
+# 
 # @version 2.0.0
 ################################################################################
 

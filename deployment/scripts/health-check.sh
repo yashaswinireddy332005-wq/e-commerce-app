@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ################################################################################
-# Health Check Script for Fusion Electronics
+# Health Check Script for 
 #
 # This script performs comprehensive health checks on deployed environments
 # including application health, database connectivity, vector DB availability,
@@ -10,7 +10,7 @@
 # Usage:
 #   ./health-check.sh [blue|green|canary|stable|all]
 #
-# @author Fusion Electronics DevOps Team
+# 
 # @version 2.0.0
 ################################################################################
 
