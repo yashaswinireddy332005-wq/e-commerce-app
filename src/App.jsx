@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { HashRouter, Routes, Route } from 'react-router-dom';
 import { Box, Container, CssBaseline } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import NavigationBar from './components/NavigationBar';
@@ -203,7 +203,7 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <BrowserRouter>
+      <HashRouter>
         <ScrollToTop />
         <NavigationBar cartItemCount={cart.length} />
         <Box component="main" sx={{ minHeight: 'calc(100vh - 200px)' }}>
@@ -246,7 +246,7 @@ function App() {
           </Container>
         </Box>
         <Footer />
-      </BrowserRouter>
+      </HashRouter>
     </ThemeProvider>
   );
 }
