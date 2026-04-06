@@ -1,20 +1,3 @@
-# --- 1) Deps stage: install only backend workspace using the ROOT lockfile ---
-FROM node:18-alpine AS deps
-
-WORKDIR /app
-
-# Copy root manifests (workspaces + lock live at repo root)
-COPY package.json package-lock.json ./
-
-# Copy backend manifest so npm can resolve that workspace
-COPY backend/package.json backend/package.json
-
-# Install ONLY the backend workspace using the root lockfile
-# (omit devDependencies for a lean runtime)
-RUN npm ci -w backend --include-workspace-root=false --omit=dev
-
-
-# --- 2) Runtime stage ---
 FROM node:18-alpine
 
 # Provide a human-readable description for the image
@@ -23,17 +6,15 @@ LABEL org.opencontainers.image.description="E-Commerce Backend - Express.js serv
 WORKDIR /app
 ENV NODE_ENV=production
 
-# Bring in hoisted node_modules (contains backend deps)
-COPY --from=deps /app/node_modules /app/node_modules
+# Install production dependencies for backend service
+COPY package.json package-lock.json ./
+RUN npm ci --omit=dev
 
-# Copy backend sources
-COPY backend/ backend/
-
-# Run from backend folder
-WORKDIR /app/backend
+# Copy backend application code
+COPY . .
 
 # Expose the port your app listens on
-EXPOSE 3000
+EXPOSE 8000
 
 # Start your app
 CMD ["node", "index.js"]
