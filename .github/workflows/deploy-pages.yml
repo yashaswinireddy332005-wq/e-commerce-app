@@ -18,7 +18,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      REACT_APP_API_BASE_URL: https://fusion-electronics-api.vercel.app/api
+      REACT_APP_API_BASE_URL: https://e-commerce-app-vaux.onrender.com/api
     steps:
       - name: Checkout
         uses: actions/checkout@v4
