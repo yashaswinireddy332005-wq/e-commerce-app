@@ -86,6 +86,7 @@ function NavigationBar({ cartItemCount }) {
 
   const handleLogout = () => {
     localStorage.removeItem('MERNEcommerceToken');
+    localStorage.removeItem('token');
     setIsLoggedIn(false);
     notify({ severity: 'success', message: 'Signed out successfully.' });
     navigate('/');

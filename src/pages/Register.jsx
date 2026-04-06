@@ -32,8 +32,10 @@ function Register() {
     try {
       const response = await apiClient.post('auth/register', { name, email, password });
       const token = response.data.token;
+      localStorage.setItem('MERNEcommerceToken', token);
       localStorage.setItem('token', token);
       notify({ severity: 'success', message: 'Account created! Redirecting you home…' });
+      window.dispatchEvent(new Event('auth-changed'));
       navigate('/', { replace: true });
     } catch (err) {
       if (err.response?.data?.errors) {

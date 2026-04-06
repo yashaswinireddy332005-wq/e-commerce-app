@@ -99,27 +99,101 @@ function App() {
   const [cart, setCart] = React.useState([]);
   const [loading, setLoading] = React.useState(true);
   const [error, setError] = React.useState(null);
+  const [cartReady, setCartReady] = React.useState(false);
   const { notify } = useNotifier();
   const notifyRef = React.useRef(notify);
+
+  const getAuthToken = React.useCallback(() => localStorage.getItem('MERNEcommerceToken') || localStorage.getItem('token'), []);
+
+  const normalizeCartItem = React.useCallback(item => {
+    const canonicalId = item?._id || item?.id || item?.productId;
+    if (!canonicalId) return null;
+
+    return {
+      ...item,
+      id: canonicalId,
+      _id: canonicalId,
+      quantity: Math.max(1, Number(item?.quantity || 1)),
+    };
+  }, []);
 
   React.useEffect(() => {
     notifyRef.current = notify;
   }, [notify]);
 
   React.useEffect(() => {
-    try {
-      const storedCart = JSON.parse(localStorage.getItem('fusionCart'));
-      if (Array.isArray(storedCart) && storedCart.length) {
-        setCart(storedCart);
+    let active = true;
+
+    const hydrateCart = async () => {
+      const storedCart = (() => {
+        try {
+          const parsed = JSON.parse(localStorage.getItem('fusionCart'));
+          return Array.isArray(parsed) ? parsed.map(normalizeCartItem).filter(Boolean) : [];
+        } catch (storageError) {
+          console.warn('Unable to restore saved cart', storageError);
+          return [];
+        }
+      })();
+
+      const token = getAuthToken();
+
+      if (!token) {
+        if (storedCart.length && active) {
+          setCart(storedCart);
+        }
+        if (active) {
+          setCartReady(true);
+        }
+        return;
       }
-    } catch (storageError) {
-      console.warn('Unable to restore saved cart', storageError);
-    }
-  }, []);
+
+      try {
+        const { data } = await apiClient.get('cart', { headers: { 'x-auth-token': token } });
+        const serverCart = Array.isArray(data?.items) ? data.items.map(normalizeCartItem).filter(Boolean) : [];
+
+        if (serverCart.length) {
+          if (active) setCart(serverCart);
+        } else if (storedCart.length) {
+          if (active) setCart(storedCart);
+          await apiClient.put('cart', { items: storedCart }, { headers: { 'x-auth-token': token } });
+        }
+      } catch (cartError) {
+        console.warn('Unable to restore saved cart from server', cartError);
+        if (storedCart.length && active) {
+          setCart(storedCart);
+        }
+      } finally {
+        if (active) {
+          setCartReady(true);
+        }
+      }
+    };
+
+    const handleAuthChanged = () => {
+      hydrateCart();
+    };
+
+    hydrateCart();
+    window.addEventListener('auth-changed', handleAuthChanged);
+
+    return () => {
+      active = false;
+      window.removeEventListener('auth-changed', handleAuthChanged);
+    };
+  }, [getAuthToken, normalizeCartItem]);
 
   React.useEffect(() => {
+    if (!cartReady) return;
+
     localStorage.setItem('fusionCart', JSON.stringify(cart));
-  }, [cart]);
+
+    const token = getAuthToken();
+    if (!token) return;
+
+    apiClient.put('cart', { items: cart }, { headers: { 'x-auth-token': token } }).catch(error => {
+      console.warn('Unable to sync cart to server', error);
+    });
+  }, [cart, cartReady, getAuthToken]);
 
   React.useEffect(() => {
     let active = true;
@@ -188,7 +262,7 @@ function App() {
         return;
       }
       setCart(prevCart => {
-        const alreadyInCart = prevCart.some(item => item.id === canonicalId || item._id === canonicalId);
+        const alreadyInCart = prevCart.some(item => String(item.id || item._id) === String(canonicalId));
         if (alreadyInCart) {
           notify({ severity: 'info', message: 'Item is already in your cart.' });
           return prevCart;

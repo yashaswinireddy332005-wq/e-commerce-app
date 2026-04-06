@@ -10,6 +10,7 @@ const productRoutes = require('./routes/products');
 const checkoutRoutes = require('./routes/checkout');
 const orderRoutes = require('./routes/orders');
 const authRoutes = require('./routes/auth');
+const cartRoutes = require('./routes/cart');
 const { swaggerUi, swaggerSpec, setupSwaggerUi, setupSwaggerJson } = require('./docs/swagger');
 
 // Create Express App
@@ -88,6 +89,7 @@ app.use('/api/checkout', checkoutRoutes);
 app.use('/api/orders', orderRoutes);
 app.use('/api/search', require('./routes/search'));
 app.use('/api/auth', authRoutes);
+app.use('/api/cart', cartRoutes);
 
 // In single-service deployments, serve the built frontend from Express.
 const frontendBuildPath = path.resolve(__dirname, '..', 'build');

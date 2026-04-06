@@ -21,7 +21,9 @@ function Login() {
       const response = await apiClient.post('auth/login', { email, password });
       const token = response.data.token;
       localStorage.setItem('MERNEcommerceToken', token);
+      localStorage.setItem('token', token);
       notify({ severity: 'success', message: 'Welcome back! Redirecting…' });
+      window.dispatchEvent(new Event('auth-changed'));
       setTimeout(() => {
         window.location.href = '/';
       }, 400);
