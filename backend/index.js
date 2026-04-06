@@ -15,13 +15,25 @@ const { swaggerUi, swaggerSpec, setupSwaggerUi, setupSwaggerJson } = require('./
 // Create Express App
 const app = express();
 const PORT = process.env.PORT || 8000;
+const mongoUri = process.env.MONGO_URI;
+
+const mongoOptions = {
+  maxPoolSize: Number(process.env.MONGO_MAX_POOL_SIZE || 30),
+  minPoolSize: Number(process.env.MONGO_MIN_POOL_SIZE || 5),
+  maxIdleTimeMS: Number(process.env.MONGO_MAX_IDLE_TIME_MS || 60000),
+  serverSelectionTimeoutMS: Number(process.env.MONGO_SERVER_SELECTION_TIMEOUT_MS || 10000),
+  socketTimeoutMS: Number(process.env.MONGO_SOCKET_TIMEOUT_MS || 45000),
+  connectTimeoutMS: Number(process.env.MONGO_CONNECT_TIMEOUT_MS || 10000),
+};
+
+if (!mongoUri) {
+  console.error('❌ MONGO_URI is missing. Set it in backend/.env (local) or hosting environment variables (cloud).');
+  process.exit(1);
+}
 
 // Database Connection + Seed + Vector Sync + Server Start
 mongoose
-  .connect(process.env.MONGO_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
+  .connect(mongoUri, mongoOptions)
   .then(async () => {
     console.log('MongoDB Connected');
 
