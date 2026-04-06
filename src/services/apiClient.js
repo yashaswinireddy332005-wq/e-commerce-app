@@ -10,7 +10,8 @@ const resolveBaseURL = () => {
     return '/api';
   }
 
-  return 'https://fusion-electronics-api.vercel.app/api';
+  // Default to same-origin API so a single deployed URL works without extra env vars.
+  return '/api';
 };
 
 export const API_BASE_URL = resolveBaseURL();

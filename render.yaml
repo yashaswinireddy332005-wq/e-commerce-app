@@ -1,0 +1,28 @@
+services:
+  - type: web
+    name: mern-ecommerce-single-link
+    runtime: node
+    plan: free
+    autoDeploy: true
+    buildCommand: npm install && npm run build
+    startCommand: npm --prefix backend run build
+    healthCheckPath: /api/products
+    envVars:
+      - key: NODE_VERSION
+        value: 22
+      - key: SKIP_SEED_ON_START
+        value: "true"
+      - key: MONGO_URI
+        sync: false
+      - key: JWT_SECRET
+        sync: false
+      - key: PINECONE_API_KEY
+        sync: false
+      - key: PINECONE_HOST
+        sync: false
+      - key: PINECONE_INDEX
+        sync: false
+      - key: PINECONE_NAMESPACE
+        sync: false
+      - key: GOOGLE_AI_API_KEY
+        sync: false

@@ -3,6 +3,7 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
+const path = require('path');
 const seedDB = require('./seed/productSeeds');
 const syncPinecone = require('./sync/syncPinecone');
 const productRoutes = require('./routes/products');
@@ -65,11 +66,6 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Redirect root to /api-docs
-app.get('/', (req, res) => {
-  res.redirect('/api-docs');
-});
-
 // Setup Swagger UI with customized title
 setupSwaggerJson(app); // serves /api-docs/swagger.json
 setupSwaggerUi(app);
@@ -80,5 +76,21 @@ app.use('/api/checkout', checkoutRoutes);
 app.use('/api/orders', orderRoutes);
 app.use('/api/search', require('./routes/search'));
 app.use('/api/auth', authRoutes);
+
+// In single-service deployments, serve the built frontend from Express.
+const frontendBuildPath = path.resolve(__dirname, '..', 'build');
+app.use(express.static(frontendBuildPath));
+
+app.get('*', (req, res) => {
+  if (req.path.startsWith('/api') || req.path.startsWith('/api-docs')) {
+    return res.status(404).json({ message: 'Route not found' });
+  }
+
+  return res.sendFile(path.join(frontendBuildPath, 'index.html'), err => {
+    if (err) {
+      res.redirect('/api-docs');
+    }
+  });
+});
 
 module.exports = app;
