@@ -100,6 +100,11 @@ function App() {
   const [loading, setLoading] = React.useState(true);
   const [error, setError] = React.useState(null);
   const { notify } = useNotifier();
+  const notifyRef = React.useRef(notify);
+
+  React.useEffect(() => {
+    notifyRef.current = notify;
+  }, [notify]);
 
   React.useEffect(() => {
     try {
@@ -140,6 +145,7 @@ function App() {
           let removedCount = 0;
           setCart(prevCart => {
             if (!Array.isArray(prevCart) || !prevCart.length) return prevCart;
+            if (!normalized.length) return prevCart;
             const validIds = new Set(normalized.map(item => String(item.id)));
             const sanitized = prevCart.filter(item => {
               const itemId = item?._id || item?.id;
@@ -150,7 +156,7 @@ function App() {
           });
 
           if (removedCount > 0) {
-            notify({ severity: 'info', message: 'We refreshed your cart to remove items that are no longer available.' });
+            notifyRef.current({ severity: 'info', message: 'We refreshed your cart to remove items that are no longer available.' });
           }
         }
       } catch (err) {
@@ -158,7 +164,7 @@ function App() {
         console.error('Error fetching products:', err);
         setProducts([]);
         setError(err);
-        notify({ severity: 'error', message: 'Unable to load products. Please try again shortly.' });
+        notifyRef.current({ severity: 'error', message: 'Unable to load products. Please try again shortly.' });
       } finally {
         if (active) {
           setLoading(false);
@@ -171,7 +177,7 @@ function App() {
     return () => {
       active = false;
     };
-  }, [notify]);
+  }, []);
 
   const addToCart = React.useCallback(
     product => {
