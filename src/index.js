@@ -7,12 +7,15 @@ import { ComponentPreviews, useInitial } from './dev';
 import { NotificationProvider } from './context/NotificationProvider';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
+
+const app = (
+  <NotificationProvider>
+    <App />
+  </NotificationProvider>
+);
+
 root.render(
   <React.StrictMode>
-    <DevSupport ComponentPreviews={ComponentPreviews} useInitialHook={useInitial}>
-      <NotificationProvider>
-        <App />
-      </NotificationProvider>
-    </DevSupport>
+    {process.env.NODE_ENV === 'development' ? <DevSupport ComponentPreviews={ComponentPreviews} useInitialHook={useInitial}>{app}</DevSupport> : app}
   </React.StrictMode>
 );
