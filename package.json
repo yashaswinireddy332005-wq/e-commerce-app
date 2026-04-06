@@ -4,7 +4,7 @@
   "description": "A fullstack e-commerce website built with React, Node.js, Express, MongoDB, and Material-UI.",
   "author": "",
   "license": "MIT",
-  "homepage": "/",
+  "homepage": ".",
   "version": "1.1.0",
   "dependencies": {
     "@emotion/react": "^11.11.4",
