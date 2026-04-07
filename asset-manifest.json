@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/e-commerce-app/static/css/main.f18be34b.css",
+    "main.js": "/e-commerce-app/static/js/main.aeb225c4.js",
+    "static/media/trending-fashion.png": "/e-commerce-app/static/media/trending-fashion.8226b450aa459effb97b.png",
+    "static/media/tech-gadgets.jpg": "/e-commerce-app/static/media/tech-gadgets.3cd8fe6fc95997c8e695.jpg",
+    "static/media/summer-sale.jpg": "/e-commerce-app/static/media/summer-sale.2df93e339353173609c8.jpg",
+    "index.html": "/e-commerce-app/index.html",
+    "main.f18be34b.css.map": "/e-commerce-app/static/css/main.f18be34b.css.map",
+    "main.aeb225c4.js.map": "/e-commerce-app/static/js/main.aeb225c4.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.f18be34b.css",
+    "static/js/main.aeb225c4.js"
+  ]
+}
