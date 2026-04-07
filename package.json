@@ -4,7 +4,7 @@
   "description": "A fullstack e-commerce website built with React, Node.js, Express, MongoDB, and Material-UI.",
   "author": "",
   "license": "MIT",
-  "homepage": ".",
+  "homepage": "https://yashaswinireddy332005-wq.github.io/e-commerce-app/",
   "version": "1.1.0",
   "dependencies": {
     "@emotion/react": "^11.11.4",
@@ -39,6 +39,8 @@
   "scripts": {
     "start": "craco start",
     "build": "craco build",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "test": "jest --silent",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
@@ -78,6 +80,7 @@
     "@craco/craco": "^7.1.0",
     "babel-jest": "^30.0.4",
     "css-loader": "^7.1.2",
+    "gh-pages": "^6.3.0",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^27.5.1",
     "jest-circus": "^30.0.4",
